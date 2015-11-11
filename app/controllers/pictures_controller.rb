@@ -20,6 +20,20 @@ class PicturesController < ApplicationController
     end
   end
 
+  def edit
+    @picture = Picture.find(params[:id])
+  end
+
+  def update
+    @picture = Picture.find(params[:id])
+    if @picture.update_attributes(picture_params)
+      redirect_to @picture
+    else
+      flash["notice"] = "The changes didn't take!  Try again!"
+      render :edit
+    end
+  end
+
   private
   def picture_params
     params.require(:picture).permit(:artist, :title, :url)
