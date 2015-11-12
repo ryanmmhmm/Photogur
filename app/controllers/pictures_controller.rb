@@ -1,6 +1,6 @@
 class PicturesController < ApplicationController
   def index
-    @pictures = Picture.all
+    @pictures = Picture.order(created_at: :desc).limit(5)
   end
 
   def show
